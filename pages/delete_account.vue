@@ -32,7 +32,7 @@
     methods: {
       async getData() {
         try {
-          return await this.$axios.get(`static_pages/delete_account`).then(response => {
+          return await this.$axios.get(`static-pages/delete_account`).then(response => {
             console.log("response", response)
             this.isLoading = true;
             this.terms_content = response.data.data;
