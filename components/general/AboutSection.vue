@@ -81,12 +81,10 @@ export default {
     async getData() {
       try {
         return await this.$axios
-          .get(`static_pages/about`)
+          .get(`static-pages/about-app`)
           .then((response) => {
-            this.terms_content = response.data.data.content
-            this.terms_title = response.data.data.name
-            console.log(response.data)
-            console.log()
+            this.terms_content = response.data.data
+            // this.terms_title = response.data.data.name
           })
           .catch((error) => {
             console.log(error)

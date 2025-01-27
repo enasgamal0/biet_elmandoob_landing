@@ -2,7 +2,7 @@
     <div class="static_page_content_wrapper">  
       <div class="container">
         <div class="page_title">
-          <h2>{{ terms_title }}</h2>
+          <h2>{{ $t("nav.delete_account") }}</h2>
         </div>
   
         <div class="page_content">
@@ -32,11 +32,10 @@
     methods: {
       async getData() {
         try {
-          return await this.$axios.get(`static_pages/delete-account`).then(response => {
+          return await this.$axios.get(`static_pages/delete_account`).then(response => {
             console.log("response", response)
             this.isLoading = true;
-            this.terms_content = response.data.data.content;
-            this.terms_title = response.data.data.name;
+            this.terms_content = response.data.data;
           }).catch(error => {
             console.log(error)
           })

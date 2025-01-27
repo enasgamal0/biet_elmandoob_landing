@@ -83,10 +83,10 @@ export default {
     async getData() {
       try {
         return await this.$axios
-          .get(`social`)
+          .get(`static-pages/contact-us`)
           .then((res) => {
-            this.google_app = res?.data?.data.find(item => item.key == "play_store")?.value
-            this.app_store = res?.data?.data.find(item => item.key == "app_store")?.value
+            this.google_app = res.data.data?.app_contacts?.play_store;
+            this.app_store = res.data.data?.app_contacts?.app_store;
           })
           .catch((error) => {
             console.log(error)

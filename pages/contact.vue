@@ -36,7 +36,7 @@
 
                       <ValidationProvider rules="required" :name="$t('contact.phone')" v-slot="{ errors }">
                         <div class="form-group">
-                          <input type="text" v-model="form.phone" :placeholder="$t('contact.phone')" />
+                          <input type="text" v-model="form.mobile" :placeholder="$t('contact.phone')" />
                           <span class="validation_message">{{ errors[0] }}</span>
                         </div>
 
@@ -44,7 +44,7 @@
 
                       <ValidationProvider rules="required" :name="$t('user.select_option')" v-slot="{ errors }">
                         <div class="form-group">
-                          <select v-model="form.type">
+                          <select v-model="form.message_type">
                             <option value="" selected disabled>{{ $t('user.select_option') }}</option>
                             <option v-for="(option, index) in messageTypes" :key="'l' + index" :value="option.value">{{
                               option.name }}
@@ -61,7 +61,7 @@
                       </ValidationProvider>
 
                       <div class="form-group d-flex">
-                        <button class="send_btn main--btn" :disabled="invalid" aria-label="send" title="send"
+                        <button class="send_btn main--btn" aria-label="send" title="send"
                           type="submit">{{
                             $t('contact.send') }}</button>
                       </div>
@@ -110,9 +110,9 @@ export default {
       form: {
         name: "",
         email: "",
-        phone: "",
+        mobile: "",
         message: "",
-        type: ""
+        message_type: ""
       },
 
 
@@ -126,27 +126,27 @@ export default {
         {
           id: 1,
           name: this.$t("STATUS.request"),
-          value: "request",
+          value: "Request",
         },
         {
           id: 2,
           name: this.$t("STATUS.suggestion"),
-          value: "suggestion",
+          value: "Suggestion",
         },
         {
           id: 3,
           name: this.$t("STATUS.inquiry"),
-          value: "inquiry",
+          value: "Inquiry",
         },
         {
           id: 4,
           name: this.$t("STATUS.complaint"),
-          value: "complaint",
+          value: "Complaint",
         },
         {
           id: 5,
           name: this.$t("STATUS.other"),
-          value: "other",
+          value: "Another",
         },
         // {
         //   id: 6,
@@ -177,11 +177,11 @@ export default {
     async sendData() {
 
       try {
-        await this.$axios.$post('contact_us', this.form).then(response => {
+        await this.$axios.$post('static-pages/contact-us', this.form).then(response => {
 
           this.form.name = '';
           this.form.email = '';
-          this.form.phone = '';
+          this.form.mobile = '';
           this.form.message = '';
 
           this.$refs.observer.reset();
@@ -191,7 +191,7 @@ export default {
           this.$swal.fire({
             position: 'center',
             type: 'success',
-            text: `${response.messages}`,
+            text: `${this.$t("validations.sent_success")}`,
             showConfirmButton: false,
             timer: 3000
           })

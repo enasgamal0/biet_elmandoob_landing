@@ -50,11 +50,11 @@
               </a>
             </li>
     
-            <li class="social_links_item" v-if="email">
+            <!-- <li class="social_links_item" v-if="email">
               <a :href="`mailto:${email}`" class="icon">
                 <i class="fa fa-envelope"></i>
               </a>
-            </li>
+            </li> -->
     
             <li class="social_links_item" v-if="snapchat">
               <a :href="snapchat" target="_blank" class="icon">
@@ -66,7 +66,7 @@
         <!-- End:: Logo Wrapper -->
 
         <!-- Start:: Routes Wrapper -->
-        <div class="col-lg-4 col-xl-2 d-flex justify-content-center my-3">
+        <div class="col-lg-5 col-xl-3 d-flex justify-content-center my-3">
           <ul class="footer_routes_list px-5">
             <li class="footer_route">
               <button style="text-align: start;" class="active" @click="scrollToSection('hero_section')"> {{ $t("nav.home") }} </button>
@@ -104,28 +104,28 @@
         <!-- Start:: Contact Info Wrapper -->
         <div class="col-lg-4 col-xl-5 d-flex justify-content-between flex-column flex-lg-row my-3">
           <ul class="contact_info_list">
-            <li class="contact_info_item">
+            <li class="contact_info_item" v-if="email">
               <span class="icon">
                 <i class="fa-regular fa-envelope"></i>
               </span>
 
-              <a v-if="email" :href="'mailto:' + email"><span class="value"> {{ email }}
+              <a :href="'mailto:' + email"><span class="value"> {{ email }}
                 </span></a>
             </li>
 
-            <li class="contact_info_item">
+            <li class="contact_info_item" v-if="phone" v-for="phone_num in phone">
               <span class="icon">
                 <i class="fa-solid fa-phone"></i>
               </span>
-              <a v-if="phone" :href="'tel:' + phone"><span class="value"> {{ phone }}
+              <a :href="'tel:' + phone_num"><span class="value"> {{ phone_num }}
               </span></a>
             </li>
 
-            <li class="contact_info_item">
+            <li class="contact_info_item" v-if="address">
               <span class="icon">
                 <i class="fa-solid fa-location-dot"></i>
               </span>
-              <span class="value" v-if="address"> {{ address }}</span>
+              <span class="value"> {{ address }}</span>
             </li>
           </ul>
         </div>
@@ -181,18 +181,18 @@ export default {
 
 
     async getData() {
-      await this.$axios.get('social').then((res) => {
-        this.whatsapp = res?.data?.data.find(item => item.key == "whatsapp")?.value;
-        this.phone = res?.data?.data.find(item => item.key == "phone")?.value;
-        this.facebook = res?.data?.data.find(item => item.key == "facebook")?.value;
-        this.linkedIn = res?.data?.data.find(item => item.key == "linkedIn")?.value;
-        this.instagram = res?.data?.data.find(item => item.key == "instagram")?.value;
-        this.telegram = res?.data?.data.find(item => item.key == "telegram")?.value;
-        this.snapchat = res?.data?.data.find(item => item.key == "snapchat")?.value;
-        this.tiktok = res?.data?.data.find(item => item.key == "tiktok")?.value;
-        this.twitter = res?.data?.data.find(item => item.key == "twitter")?.value;
-        this.email = res?.data?.data.find(item => item.key == "email")?.value;
-        this.address = res?.data?.data.find(item => item.key == "address")?.value;
+      await this.$axios.get('static-pages/contact-us').then((res) => {
+        this.email = res.data.data?.app_contacts?.email;
+        this.whatsapp = res.data.data?.app_contacts?.watsApp;
+        this.facebook = res.data.data?.app_contacts?.facebook;
+        this.linkedIn = res.data.data?.app_contacts?.linkedIn;
+        this.instagram = res.data.data?.app_contacts?.instagram;
+        this.telegram = res.data.data?.app_contacts?.telegram;
+        this.snapchat = res.data.data?.app_contacts?.snapchat;
+        this.tiktok = res.data.data?.app_contacts?.tiktok;
+        this.twitter = res.data.data?.app_contacts?.twitter;
+        this.address = res.data.data?.app_contacts?.address;
+        this.phone = res.data.data?.app_contacts?.phones;
       })
     },
   },

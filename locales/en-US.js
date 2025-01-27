@@ -159,5 +159,6 @@ export default {
     pa: 'Password must contain at least one symbol, one uppercase letter, and be more than 9 characters long',
     email_end:
       'The {field} field must be a valid email ending with @gmail.com or @yahoo.com',
+    sent_success: 'Your Message has been sent successfully'
   },
 }
