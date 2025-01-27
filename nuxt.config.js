@@ -191,7 +191,7 @@ export default {
   },
 
   server: {
-    port: 5034,
+    port: 5075,
   },
   // env: {
   //   baseUrl: process.env.baseUrl || '',
